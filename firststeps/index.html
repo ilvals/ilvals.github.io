@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+const getBaseLog = (x, y) => {
+  return Math.log(y) / Math.log(x);
+}
+
+      let min = prompt('Придумайте диапазон чисел, из которого вы будете выбирать одно число (например, от 1 до 2000)... Теперь введите начальное число этого диапазона');
+      console.log (min);
+
+      let max = prompt ('Задайте конечное число диапазона');
+      console.log (max);
+
+      let attempt = Math.ceil(getBaseLog(2, max - min + 1)); //попытки, логарифм от диапазона чисел, округлённый до ближайшего целого
+
+      alert (`Итак Ваш диапазон чисел от ${min} до ${max}. Прямо сейчас выберите и запомните любое число из этого диапазона и нажмите "Закрыть". Я угадаю ваше число максимум за ${attempt} попытки (попыток)!!!`);
+      alert (`Теперь я буду пытаться угадать ваше число, а вы будете отвечать, меньше ваше число или больше. Если ваше число меньше, чем моё, то пишите -, а если больше, то +. Если я угадал ваше число, то отвечайте =`);
+
+      let mid, answer;
+      ErrorInput: for (let i = 1; i <= attempt; i += 1){
+
+        mid = Math.floor((Number(max) + Number(min)) / 2); // среднее, с округлением в меньшую сторону
+        answer = prompt(`Моя попытка угадать число № ${i}: Ваше число меньше, больше или равно ${mid}?`);
+
+        if (answer === '+') {
+          min = mid;
+          continue;
+        } else if (answer === '-') {
+          max = mid;
+          continue;
+        } else if (answer === '=') {
+          alert (`Я угадал ваше число за ${i} попыток из обещанных мною ${attempt} попыток!`);
+          break ErrorInput;
+        } else {
+          alert ("Введено неверное значение!");
+          break;
+        }
+
+      }
+
+    </script>
+</body>
+</html>
